@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Sunset — GTA-style Cover Maker</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23160a26'/%3E%3Ccircle cx='16' cy='20' r='9' fill='%23ff7a3d'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">★</span> VICE SUNSET</div>
+  <p class="tagline">Turn any photo into GTA-style cover art — offline, on your machine.</p>
+</header>
+<main class="app">
+  <section class="controls" aria-label="Cover controls">
+    <div class="group">
+      <h2>1 · Photos</h2>
+      <label class="file-label"><span>Hero</span> <input id="photo-0" type="file" accept="image/*"></label>
+      <label class="file-label"><span>Top side</span> <input id="photo-1" type="file" accept="image/*"></label>
+      <label class="file-label"><span>Bottom side</span> <input id="photo-2" type="file" accept="image/*"></label>
+      <label class="check"><input id="one-photo" type="checkbox"> Use one photo for all three panels</label>
+      <button id="samples" type="button" class="ghost">Load sample photos</button>
+      <p class="hint">Or drop a photo straight onto a panel in the preview.</p>
+    </div>
+
+    <div class="group">
+      <h2>2 · Crop &amp; position</h2>
+      <div class="row" role="group" aria-label="Select panel">
+        <button type="button" data-panel="0" class="chip active">Hero</button>
+        <button type="button" data-panel="1" class="chip">Top side</button>
+        <button type="button" data-panel="2" class="chip">Bottom side</button>
+      </div>
+      <label>Zoom <span id="zoom-value">100%</span>
+        <input id="zoom" type="range" min="1" max="2.5" step="0.05" value="1">
+      </label>
+      <button id="reset-crop" type="button" class="ghost">Reset crop</button>
+      <p class="hint">Click a panel to select it, then drag it in the preview to move the photo.</p>
+    </div>
+
+    <div class="group">
+      <h2>3 · Caption</h2>
+      <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
+      <label>Lettering size <span id="caption-size-value">100%</span>
+        <input id="caption-size" type="range" min="60" max="140" step="5" value="100">
+      </label>
+      <div class="row" role="group" aria-label="Caption theme">
+        <label class="swatch sw-white"><input type="radio" name="theme" value="white" checked> White</label>
+        <label class="swatch sw-neon"><input type="radio" name="theme" value="neon"> Neon pink</label>
+        <label class="swatch sw-gold"><input type="radio" name="theme" value="gold"> Gold</label>
+      </div>
+      <div class="row" role="group" aria-label="Caption position">
+        <button type="button" data-pos="bottom" class="chip active">Caption at bottom</button>
+        <button type="button" data-pos="top" class="chip">Caption at top</button>
+      </div>
+    </div>
+
+    <div class="group">
+      <h2>4 · Export</h2>
+      <div class="row sizes" role="group" aria-label="Post size">
+        <label class="swatch"><input type="radio" name="size" value="square" checked> 1080 × 1080</label>
+        <label class="swatch"><input type="radio" name="size" value="portrait"> 1080 × 1350</label>
+        <label class="swatch"><input type="radio" name="size" value="wide"> 1920 × 1080</label>
+      </div>
+      <button id="export" type="button" class="primary">Export PNG</button>
+      <p id="status" role="status">Sample photos loaded — export when it looks right.</p>
+    </div>
+  </section>
+
+  <section class="preview" aria-label="Live preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+    <p class="preview-note">Live preview — what you see is what the PNG will be.</p>
+  </section>
+</main>
+<footer class="foot">Runs fully offline. Your photos never leave this machine. All art and lettering are original — no Rockstar Games logo, artwork or fonts.</footer>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
